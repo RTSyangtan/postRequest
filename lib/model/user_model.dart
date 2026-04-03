@@ -1,8 +1,10 @@
 class UserModel {
+
   final String name;
   final String email;
   final String password;
   final String avatar;
+
 
   UserModel({
     required this.name,
@@ -11,12 +13,13 @@ class UserModel {
     required this.avatar
 });
 
-Map<String,dynamic> toJson(){
-  return <String,dynamic> {
-    'name':name,
-    'email':email,
-    'password':password,
-    'avatar':avatar
-  };
-}
+  Map<String,dynamic> toJson(){
+    return <String,dynamic>{
+      'name':name,
+      'email':email,
+      'password':password,
+      'avatar':avatar
+
+    };
+  }
 }
