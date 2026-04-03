@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:withtheclass/controller/register_controller.dart';
 import 'package:withtheclass/model/user_model.dart';
+import 'package:withtheclass/views/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -52,16 +53,19 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: InputDecoration(border: OutlineInputBorder(),hintText: 'Enter your avatar'),
               controller: avatarCtrl,
             ),
+            Obx((){
+              return  ElevatedButton(onPressed: (){
+                final user = UserModel(
+                    name: nameCtrl.text,
+                    email: emailCtrl.text,
+                    password: passwordCtrl.text,
+                    avatar: avatarCtrl.text);
 
-            ElevatedButton(onPressed: (){
-              final user = UserModel(
-                  name: nameCtrl.text,
-                  email: emailCtrl.text,
-                  password: passwordCtrl.text,
-                  avatar: avatarCtrl.text);
+                    userCtrl.registerUser(user);
+                    Get.to(()=>LoginPage());
+              }, child: userCtrl.isLoading.value==true?CircularProgressIndicator(): Text('Register'));
+            })
 
-              userCtrl.registerUser(user);
-            }, child: Text('Register'))
           ],
         ),
       ),

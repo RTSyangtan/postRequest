@@ -4,19 +4,20 @@ import 'package:withtheclass/services/api_service.dart';
 
 class RegisterController {
 
-  final _apiService = ApiService();
-
   var isLoading = false.obs;
 
   Future<void> registerUser(UserModel model) async{
 
     try{
-      isLoading = true.obs;
-      await _apiService.registerUser(model);
+      isLoading.value = true;
+      await ApiService().registerUser(model);
+
+      isLoading.value = false;
       Get.snackbar('Success', 'User created successfully');
     }catch(err){
-      isLoading = false.obs;
+      isLoading.value = false;
       Get.snackbar('Failed', 'User creation Failed! error $err');
+      print('hellooooooooooooooooooooooooooohere it is$err');
     }
   }
 }
