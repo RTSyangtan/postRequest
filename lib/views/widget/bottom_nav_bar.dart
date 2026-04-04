@@ -13,7 +13,7 @@ class BottomNavBarPage extends StatelessWidget {
   Widget build(BuildContext context) {
   final navCtrl = Get.put(NavBarController());
     final pages = [
-      const HomePage(),
+       HomePage(),
       const SearchPage(),
       const CartPage(),
       const ProfilePage()
