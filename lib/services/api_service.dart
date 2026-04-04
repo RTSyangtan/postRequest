@@ -43,15 +43,9 @@ class ApiService {
   
   Future loginUser(LoginModel model )async{
     try{
-      print('yaaaaaaaaaaaaxaaaaaaaaaaaaaaa');
-      print(model.email);
-      print(model.password);
-
       final response = await dio.post('auth/login',data:model.toJson() );
-      print(response.data);
      return response.data;
     }on DioException catch(err){
-      print('Yahapani?????????????????????????????');
       throw '$err';
     }
   }

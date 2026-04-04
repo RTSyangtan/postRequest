@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:withtheclass/controller/login_controller.dart';
 import 'package:withtheclass/model/login_model.dart';
+import 'package:withtheclass/views/widget/bottom_nav_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -39,10 +40,15 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(border: OutlineInputBorder(),hintText: 'Enter your password'),
             controller: passwordCtrl,
           ),
-          ElevatedButton(onPressed: (){
-            final modelUser = LoginModel(email: emailCtrl.text, password: passwordCtrl.text);
-            loginCtrl.loginUser(modelUser);
-          }, child: loginCtrl.isLoading.value? CircularProgressIndicator(): Text('Login'))
+          Obx(()=>
+              ElevatedButton(onPressed: () async{
+                final modelUser = LoginModel(email: emailCtrl.text, password: passwordCtrl.text);
+                bool success = await loginCtrl.loginUser(modelUser);
+                if(success){
+                  Get.offAll(() => BottomNavBarPage());
+                }
+              }, child: loginCtrl.isLoading.value? CircularProgressIndicator(): Text('Login'))
+          )
         ],
       ),
     ),);
