@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:withtheclass/controller/register_controller.dart';
-import 'package:withtheclass/model/user_model.dart';
-import 'package:withtheclass/views/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -12,9 +8,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
-
-  final userCtrl = Get.put(RegisterController());
   final nameCtrl = TextEditingController();
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
@@ -28,10 +21,11 @@ class _RegisterPageState extends State<RegisterPage> {
     avatarCtrl.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register Page')),
+      appBar: AppBar(title: Text('Register'),),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -39,33 +33,19 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [
             TextFormField(
               decoration: InputDecoration(border: OutlineInputBorder(),hintText: 'Enter your name'),
-              controller: nameCtrl,
             ),
             TextFormField(
               decoration: InputDecoration(border: OutlineInputBorder(),hintText: 'Enter your email'),
-              controller: emailCtrl,
             ),
             TextFormField(
               decoration: InputDecoration(border: OutlineInputBorder(),hintText: 'Enter your password'),
-              controller: passwordCtrl,
             ),
             TextFormField(
               decoration: InputDecoration(border: OutlineInputBorder(),hintText: 'Enter your avatar'),
-              controller: avatarCtrl,
             ),
-            Obx((){
-              return  ElevatedButton(onPressed: (){
-                final user = UserModel(
-                    name: nameCtrl.text,
-                    email: emailCtrl.text,
-                    password: passwordCtrl.text,
-                    avatar: avatarCtrl.text);
-
-                    userCtrl.registerUser(user);
-                    Get.to(()=>LoginPage());
-              }, child: userCtrl.isLoading.value==true?CircularProgressIndicator(): Text('Register'));
-            })
-
+            ElevatedButton(onPressed: (){
+              
+            }, child: Text('Register'))
           ],
         ),
       ),
