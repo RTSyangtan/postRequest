@@ -14,6 +14,14 @@ ApiService(){
     })
   );
 
+  dio.interceptors.add(InterceptorsWrapper(
+    onRequest: (options,handler){
+
+    },
+    onResponse: (response,handler){
+
+  }
+  ));
 
 }
 
